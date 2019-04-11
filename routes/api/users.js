@@ -73,13 +73,13 @@ router.post('/login', (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const handle = req.body.handle;
+  const email = req.body.email;
   const password = req.body.password;
 
-  User.findOne({ handle })
+  User.findOne({ email })
     .then(user => {
       if (!user) {
-        errors.handle = "User does not exist"
+        errors.email = "User does not exist"
         return res.status(404).json(errors);
       }
 

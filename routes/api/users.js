@@ -6,6 +6,8 @@ const keys = require('../../config/keys');
 const passport = require('passport');
 
 const User = require('../../models/User');
+const validateLoginInput = require('../../validation/login');
+const validateRegisterInput = require('../../validation/register');
 
 router.get("/test", (req, res) => res.json({
   msg: "User route"

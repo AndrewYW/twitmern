@@ -2,14 +2,15 @@ const mongoose = require('mongoose');
 const express = require("express");
 const app = express();
 const db = require('./config/keys').mongoURI;
-
-const passport = require('passport');
-app.use(passport.initialize());
-require('./config/passport')(passport);
-
 const bodyParser = require('body-parser');
 const users = require("./routes/api/users");
 const tweets = require("./routes/api/tweets");
+const passport = require('passport');
+
+app.use(passport.initialize());
+require('./config/passport')(passport);
+
+
 
 
 mongoose

@@ -19,7 +19,7 @@ router.get('/user/:user_id', (req, res) => {
     .catch(err => res.status(404).json({ notweetsfound: 'No tweets found from user' }));
 });
 
-router.get(':id', (req, res) => {
+router.get('/:id', (req, res) => {
   Tweet.findById(req.params.id)
     .then(tweet => res.json(tweet))
     .catch(err => res.status(404).json({ notweetsfound: 'No tweet found with that id' }));

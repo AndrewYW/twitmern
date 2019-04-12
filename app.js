@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require('mongoose');
 const db = require('./config/keys').mongoURI;
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const users = require("./routes/api/users");
 const tweets = require("./routes/api/tweets");
@@ -13,7 +14,12 @@ mongoose
 .then(() => console.log("Connected to MongoDB successfully"))
 .catch(err => console.log(err));
 
-app.get("/", (req, res) => { res.send("buhgingi") });
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('frontend/public'));
+  app.get('/', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'public', 'index.html'));
+  });
+}
 
 app.use(passport.initialize());
 require('./config/passport')(passport);
